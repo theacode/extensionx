@@ -24,9 +24,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	//utilities.generateCredentialsFile();
 	const triggerCharacters = ' abcdefghijklmnopqrstuvwxyz'.split('');
-	console.log(triggerCharacters)
-    let x = new AnsibleCompletionItemProvider()
-    console.log(x)
     context.subscriptions.push(vscode.languages.registerCompletionItemProvider(documentSelector, new AnsibleCompletionItemProvider(), ...triggerCharacters));
 	context.subscriptions.push(disposable);
 }

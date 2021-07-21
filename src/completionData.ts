@@ -1,17 +1,36 @@
 import * as fsextra from 'fs-extra';
 import { open } from 'fs';
-import { CompletionItem, CompletionItemKind, SnippetString, Uri } from 'vscode';
+import { CommentThreadCollapsibleState, CompletionItem, CompletionItemKind, SnippetString, Uri } from 'vscode';
 import { filter } from 'fuzzaldrin-plus';
 import * as path from 'path';
+import * as request from 'request-promise'
+import { Console } from 'console';
 //import * as url from 'url-parse';
 
-export function parseAnsibleCompletionFile(sourcefile: string): Promise<AnsibleCompletionData> {
+export async function parseAnsibleCompletionFile(sourcefile: string): Promise<AnsibleCompletionData> {
     if (!sourcefile) {
         sourcefile = path.join(__dirname, '../snippets/ansible-data.json');
     }
     var data = <JSONData>JSON.parse(fsextra.readFileSync(sourcefile, 'utf8'));
     const snippetFile = path.join(__dirname, '../snippets/codesnippets.json');
-    const codeSnippets = <CodeSnippets>JSON.parse(fsextra.readFileSync(snippetFile, 'utf8'));
+    let codeSnippets = <CodeSnippets>JSON.parse(fsextra.readFileSync(snippetFile, 'utf8'));
+    
+    let gitdata:any = null
+    let options = {
+        'method': 'GET',
+        'json': true,
+        'url': 'https://raw.githubusercontent.com/theacode/extensionx/master/snippets/codesnippets.json',
+        'headers': {
+        }
+      };
+    await request(options, function (error, response) {
+      if (error) throw new Error(error);
+      gitdata = response.body;
+      if (JSON.stringify(codeSnippets) != JSON.stringify(gitdata)) {
+        codeSnippets = gitdata
+      }
+    });
+    
 
     let modules: AnsibleCompletionItemList = [];
     let directives: AnsibleCompletionItemList = [];
