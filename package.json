@@ -1,6 +1,6 @@
 {
-	"name": "helloworld",
-	"displayName": "Extensionx",
+	"name": "autocomplete-spectrum-virtualize",
+	"displayName": "autocomplete spectrum virtualize",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
@@ -24,12 +24,17 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [
+		"languages": [
 			{
-				"command": "helloworld.helloWorld",
-				"title": "Extensionx"
+			  "id": "ansible",
+			  "alias": [
+				"ansible"
+			  ],
+			  "extensions": [
+				"ansible"
+			  ]
 			}
-		]
+		  ]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
