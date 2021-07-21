@@ -7,10 +7,20 @@
 		"vscode": "^1.58.0"
 	},
 	"categories": [
-		"Other"
+		"Other",
+		"Snippets"
 	],
+	"keywords": [
+		"ansible",
+		"playbook",
+		"spectrum virtualize",
+		"sv",
+		"snippets",
+		"ansible module"
+	  ],
 	"activationEvents": [
-		"onCommand:helloworld.helloWorld"
+		"onLanguage:yaml",
+        "onLanguage:ansible"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
