@@ -342,5 +342,19 @@
 			"  username: string #REST API username for the Spectrum Virtualize storage system. The parameters 'username' and 'password' are required if not using 'token' to authenticate a user.",
 			"  usesshkey: boolean #Choices: [no, yes]. For key-pair based SSH connection, set this field as 'yes'. Provide full path of keyfile in key_filename field. If not provided, default path of SSH key is used."
 		]
+	  },
+	  "ibm_svctask_command": {
+		"prefix": "ibm_svctask_command_snippet",
+		"description": "Runs svctask CLI command(s) on IBM Spectrum Virtualize Family storage systems. In case any svctask command fails while running this module, then the module stops processing further commands in the list. Paramiko must be installed to use this module.",
+		"body": [
+			"ibm_svctask_command:",
+			"  clustername: string #required The hostname or management IP of the Spectrum Virtualize storage system.",
+			"  command: string #A list containing svctask CLI commands to be executed on storage. Each command must start with svctask keyword.",
+			"  key_filename: string #SSH client private key filename. By default, ~/.ssh/id_rsa is used.",
+			"  log_path: string #Path of debug log file.",
+			"  password: string #REST API password for the Spectrum Virtualize storage system. The parameters 'username' and 'password' are required if not using 'token' to authenticate a user.",
+			"  username: string #REST API username for the Spectrum Virtualize storage system. The parameters 'username' and 'password' are required if not using 'token' to authenticate a user.",
+			"  usesshkey: boolean #Choices: [no, yes]. For key-pair based SSH connection, set this field as 'yes'. Provide full path of keyfile in key_filename field. If not provided, default path of SSH key is used."
+		]
 	  }
   }
